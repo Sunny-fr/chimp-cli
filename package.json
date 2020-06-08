@@ -1,0 +1,27 @@
+{
+  "name": "chimp-cli",
+  "version": "1.0.0",
+  "description": "Purpose Chimp cli will make your life easier to edit your chimp recipes This cli will allow you to use your own IDE to edit your recipe. It will also allow you use others tools (sass / js bundle and so on) It includes a live reload tool",
+  "main": "src/index.js",
+  "bin": {
+    "chimp": "src/index.js"
+  },
+  "scripts": {
+    "start": "node .",
+    "deploy": "node ./src/deploy.js",
+    "watch": "node ./src/watch.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "boxen": "^4.2.0",
+    "chalk": "^3.0.0",
+    "cli-select": "^1.1.2",
+    "node-watch": "^0.6.3",
+    "prompt": "^1.0.0",
+    "request": "^2.88.2",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {}
+}
