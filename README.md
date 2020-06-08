@@ -26,12 +26,12 @@ and run the command *chimp*
 chimp
 ```
 
-![](docs-assets/chimp-watch.gif)
+![](https://static.sunny.fr/chimp-cli//chimp-watch.gif)
 
 
 ## Demo
 
-![](docs-assets/chimp-demo.gif)
+![](https://static.sunny.fr/chimp-cli//chimp-demo.gif)
 
 
 # suggestions
