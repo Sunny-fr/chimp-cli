@@ -9,7 +9,7 @@ const showSuccess = require('../messages/success')
 
 
 function start() {
-    configExistAndValid({config})
+    configExistAndValid({config, slugOnly: true})
         .then(chimpConfig => {
             let packagePath = path.dirname(require.resolve('./rollup/.chimp-cfg'));
 

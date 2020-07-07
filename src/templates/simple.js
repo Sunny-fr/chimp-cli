@@ -6,7 +6,7 @@ const fs = require('fs')
 const chalk = require('chalk')
 
 function start() {
-    configExistAndValid({config})
+    configExistAndValid({config, slugOnly: true})
         .then(chimpConfig => {
             let packagePath = path.dirname(require.resolve('./simple/.chimp-cfg'));
 
