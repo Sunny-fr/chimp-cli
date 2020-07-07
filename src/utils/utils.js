@@ -1,9 +1,4 @@
 const fs = require('fs')
-//const path = require('path')
-
-//const inquirer = require('inquirer')
-
-
 
 function templatize(s, d) {
     for (let p in d)
@@ -38,11 +33,42 @@ const omit = (props, prop) => {
 }
 
 
+const cleanParams = function (str) {
+    return str.replace(/({[A-z0-9_\-]+})/g, '')
+}
+
+const interpolate = function (str, params) {
+    const keys = Object.keys(params);
+    // if no string is given we generate one ( params = {foo:'bar', baz:'wth'} will generate {foo}:{baz})
+    // it will provide a unique id for models
+    const stringToDecorate = str || keys.sort().map(v => '{' + v + '}').join(':')
+    // it will turn path/to/{id} to path/to/123
+    const result = keys.reduce((prev, current) => {
+        const elm_val = params[current]
+        // skip functions
+        if (typeof elm_val === 'function') return prev
+
+        if (Array.isArray(elm_val)) {
+            return prev.replace(
+                new RegExp('{' + current + '}', 'g'),
+                '[' + elm_val.map(item => typeof item === 'object' ? interpolate(null, item) : item).join('|') + ']'
+            )
+        }
+        if (typeof elm_val === 'undefined') return prev
+        return prev.replace(new RegExp('{' + current + '}', 'g'), elm_val)
+    }, stringToDecorate)
+    // if params are missing we remove them
+    // path/to/123/{anotherId} => path/to/123/
+    return cleanParams(result)
+}
+
+
 module.exports = {
     getFileContents,
     writeFileContent,
     createDirectory,
     templatize,
+    interpolate,
     fileExists,
     omit
 }
