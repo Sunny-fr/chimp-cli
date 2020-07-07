@@ -1,6 +1,6 @@
 {
   "name": "chimp-cli",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Purpose Chimp cli will make your life easier to edit your chimp recipes This cli will allow you to use your own IDE to edit your recipe. It will also allow you use others tools (sass / js bundle and so on) It includes a live reload tool",
   "main": "src/index.js",
   "bin": {
