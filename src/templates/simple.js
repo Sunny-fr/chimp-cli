@@ -8,7 +8,7 @@ const chalk = require('chalk')
 function start() {
     configExistAndValid({config, slugOnly: true})
         .then(chimpConfig => {
-            const packagePath = path.dirname(require.resolve('./simple/.chimp-cfg'));
+            const packagePath = path.dirname(require.resolve('./simple/.chimp-cfg.tpl'));
 
             console.log('')
             console.log('')

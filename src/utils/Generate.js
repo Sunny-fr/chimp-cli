@@ -16,11 +16,13 @@ class Generate {
     }
 
     getFileContents(file) {
-        return fs.readFileSync(file, {encoding: 'utf8'})
+        return fs.readFileSync(file, {
+            encoding: 'utf8'
+        })
     }
 
     getStructure(root) {
-        return new Promise(function (resolve, reject) {
+        return new Promise(function (resolve/*, reject*/) {
             const structure = {}
             function walkSync(currentDirPath) {
                 fs.readdirSync(currentDirPath).forEach(function (name) {
@@ -52,7 +54,10 @@ class Generate {
                 } else if (item.type === 'file') {
                     const fullPath = base + item.path.substr(root.length + 1)
                     const contents = this.getFileContents(item.path)
-                    fs.writeFileSync(fullPath, interpolate(contents, this.chimpConfig))
+                    const pathParts = fullPath.split('.')
+                    const isTemplateFile = pathParts[pathParts.length-1] === 'tpl'
+                    const newPath = isTemplateFile ? pathParts.slice(0, pathParts.length - 1).join('.') : fullPath
+                    fs.writeFileSync(newPath, isTemplateFile ? interpolate(contents, this.chimpConfig) : contents)
                     log('   | -- ' + item.path.substr(root.length + 1))
                 }
             }, )

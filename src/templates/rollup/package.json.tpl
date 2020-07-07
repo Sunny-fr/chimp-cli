@@ -2,13 +2,13 @@
   "name": "{recipe-slug}",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "chimp",
-    "chimp:watch": "chimp watch",
-    "chimp:deploy": "chimp deploy",
-    "rollup:bundle": "rollup -c ./rollup.config.js",
+    "chimp:watch": "rollup -c ./rollup.config.js && chimp watch",
+    "chimp:deploy": "rollup -c ./rollup.config.js && chimp deploy",
     "rollup:watch": "rollup  -c ./rollup.config.js -w",
+    "rollup:bundle": "rollup -c ./rollup.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

@@ -6,7 +6,7 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import {terser} from 'rollup-plugin-terser'
 
 export default {
-    input: './src/main.js',
+    input: './src/index.js',
 
     output: [
         {
