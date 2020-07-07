@@ -11,15 +11,13 @@ const showSuccess = require('../messages/success')
 function start() {
     configExistAndValid({config, slugOnly: true})
         .then(chimpConfig => {
-            let packagePath = path.dirname(require.resolve('./rollup/.chimp-cfg'));
-
+            const packagePath = path.dirname(require.resolve('./rollup/.chimp-cfg'));
 
             console.log('')
             console.log('')
             console.log(chalk.green(' Generating Files for Rollup + Sass Template... '))
             console.log('')
             console.log('')
-
 
             new Generate({
                 templatePath: packagePath,
