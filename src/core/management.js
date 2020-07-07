@@ -49,11 +49,12 @@ function authentificationPrompt() {
 
 }
 
-function configManagement({onComplete}) {
+function configManagement({onComplete, slugOnly = false}) {
 
     prompt.start()
 
-    prompt.get(properties, function (err, result) {
+    const props = slugOnly ? [properties.slice(0,1)] : properties
+    prompt.get(props, function (err, result) {
         if (err) {
             return onErr(err)
         }
@@ -92,7 +93,7 @@ const getAccessToken = ({config}) => {
     }
 }
 
-function configExistAndValid({config}) {
+function configExistAndValid({config, slugOnly = false}) {
     const exists = fileExists(config.main)
     if (!exists) {
         console.log(' - No chimp config file has been found ')
@@ -100,6 +101,7 @@ function configExistAndValid({config}) {
         console.log(' ')
         return new Promise((resolve, reject) => {
             configManagement({
+                slugOnly,
                 onComplete: (result) => {
                     writeConfig({result, config})
                     return resolve(result)
