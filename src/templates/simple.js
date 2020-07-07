@@ -8,15 +8,13 @@ const chalk = require('chalk')
 function start() {
     configExistAndValid({config, slugOnly: true})
         .then(chimpConfig => {
-            let packagePath = path.dirname(require.resolve('./simple/.chimp-cfg'));
-
+            const packagePath = path.dirname(require.resolve('./simple/.chimp-cfg'));
 
             console.log('')
             console.log('')
             console.log(chalk.green(' Generating Files for Simple Template... '))
             console.log('')
             console.log('')
-
 
             new Generate({
                 templatePath: packagePath,

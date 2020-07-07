@@ -53,7 +53,7 @@ function configManagement({onComplete, slugOnly = false}) {
 
     prompt.start()
 
-    const props = slugOnly ? [properties.slice(0,1)] : properties
+    const props = slugOnly ? properties.slice(0,1) : properties
     prompt.get(props, function (err, result) {
         if (err) {
             return onErr(err)
@@ -99,7 +99,7 @@ function configExistAndValid({config, slugOnly = false}) {
         console.log(' - No chimp config file has been found ')
         console.log(' - Creating a new one')
         console.log(' ')
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             configManagement({
                 slugOnly,
                 onComplete: (result) => {
@@ -138,7 +138,7 @@ const hasAuthToken = ({config}) => {
     return fileExists(config.access_token_path)
 }
 
-const checkTokenValidity = ({chimpConfig, config}) => {
+const checkTokenValidity = ({/*chimpConfig, */ config}) => {
     if(!hasAuthToken({config})) return Promise.reject('no access token found')
     return new Promise((resolve, reject) => {
         const accessToken = getAccessToken({config})
@@ -163,7 +163,7 @@ const authentication = ({chimpConfig, config}) => {
                 chimpConfig,
                 token: accessToken.token
             }
-        }).catch(e => {
+        }).catch(() => {
             //console.log(e)
             return authentificationPrompt()
                 .then((result) => {
