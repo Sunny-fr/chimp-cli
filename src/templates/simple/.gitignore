@@ -1,0 +1,18 @@
+.DS_Store
+
+# IDE Files
+#-------------------------
+.idea*
+
+
+## Sublime Text cache files
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+package-lock.json
+
+build
+node_modules
+.chimp-cfg

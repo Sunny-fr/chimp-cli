@@ -15,7 +15,7 @@ It includes a live reload tool
 
 checkout and install globally
 ```
-git clone https://github.com/Sunny-fr/toolbox.git && npm i -g
+npm i -g chimp-cli
 ```
 
 ## Command
