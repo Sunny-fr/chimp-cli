@@ -6,12 +6,13 @@ const fs = require('fs')
 const chalk = require('chalk')
 const execSync = require('child_process').execSync
 const showSuccess = require('../messages/success')
+const instructions = require('../messages/rollup-instructions')
 
 
 function start() {
     configExistAndValid({config, slugOnly: true})
         .then(chimpConfig => {
-            const packagePath = path.dirname(require.resolve('./rollup/.chimp-cfg'));
+            const packagePath = path.dirname(require.resolve('./rollup/.chimp-cfg.tpl'));
 
             console.log('')
             console.log('')
@@ -50,7 +51,9 @@ function start() {
                 console.log(chalk.green(' you recipe ! '))
                 console.log('')
                 console.log('')
-
+                instructions()
+                console.log('')
+                console.log('')
 
 
             })
