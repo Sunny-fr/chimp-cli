@@ -16,7 +16,7 @@
             .then(content => createScriptElement(content))
     }
     window.__chimp__.loaded = true
-    fetchAndInjectScript('---SERVER---/socket.io/socket.io.js')
+    fetchAndInjectScript('---SERVER---/socket-io/client')
         .then(() => {
             console.log(' *** CHIMP - SOCKET IO - INJECTED *** ')
             return true

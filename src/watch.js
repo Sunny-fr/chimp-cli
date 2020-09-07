@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 const http = require('http')
 const chalk = require('chalk')
+const fs = require('fs')
+const path = require('path')
 const fileWatcher = require('./watch/file-watcher')
 const {configExistAndValid} = require('./core/management')
 const {getRecipe, updateRecipe} = require('./api/chimp')
@@ -39,18 +41,42 @@ const backupScriptAndDeployLiveReloadToRecipe = ({chimpConfig, SERVER}) => {
 }
 
 
+const nodeClientCache = {
+    content: null
+}
+
+const getNodeClientAsText = () => {
+    try {
+        if(nodeClientCache.content){
+            return nodeClientCache.content
+        }
+        const clientPath = '../node_modules/socket.io-client/dist/socket.io.slim.js'
+        const realPath = path.resolve(__dirname, clientPath)
+        const content = fs.readFileSync(realPath, {content:'ut8'})
+        return nodeClientCache.content = content
+    } catch (e) {
+        console.log('cant get socket client')
+        console.log(e)
+    }
+
+}
+
 function start() {
 
     const SERVER = `http://localhost:${PORT}`
     const startServer = (chimpConfig) => {
         const server = http.createServer(function (req, res) {
-
             const lastPath = req.url.split('/').pop()
             const send404 = () => {
                 res.writeHead(404);
                 res.end(JSON.stringify({message: 'not found'}));
             }
 
+            if(req.url === '/socket-io/client') {
+                addCors(req, res)
+                res.writeHead(200, { 'Content-Type': 'text/plain' });
+                return res.end(getNodeClientAsText());
+            }
             if(lastPath === 'js') {
                 const content = getFileContents(chimpConfig['js-path'])
                 addCors(req, res)
@@ -90,7 +116,7 @@ function start() {
 
         })
         const io = require('socket.io')(server, {
-            serveClient: true,
+            serveClient: false,
             // below are engine.IO options
             reconnectionDelay: 1000,
             reconnectionAttempts: 5,
@@ -101,6 +127,7 @@ function start() {
 
         server.listen(PORT)
 
+        console.clear()
         console.log('')
         console.log('')
         console.log(chalk.yellow('serving : ', SERVER ))

@@ -1,6 +1,6 @@
 {
   "name": "chimp-cli",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "Purpose Chimp cli will make your life easier to edit your chimp recipes This cli will allow you to use your own IDE to edit your recipe. It will also allow you use others tools (sass / js bundle and so on) It includes a live reload tool",
   "main": "src/index.js",
   "bin": {
@@ -21,7 +21,8 @@
     "node-watch": "^0.6.3",
     "prompt": "^1.0.0",
     "request": "^2.88.2",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0"
   },
   "devDependencies": {},
   "homepage": "https://github.com/sunny-fr/chimp-cli",
